@@ -1,3 +1,6 @@
+/* @jsx jsx */
+import { jsx } from "@emotion/react";
+import React from "react"
 import {DateTime} from "luxon"
 import humanizeDuration from "humanize-duration"
 import {useState, useEffect } from "react"
@@ -44,7 +47,7 @@ export const App=()=> {
 			) : (
 				<>
 					<p style={{fontSize: 60, fontFamily: 'Iosevka Web', fontWeight: 500, transform: "rotate(8deg)"}}>Not yet,</p>
-					<p style={{fontSize: 40, fontFamily: 'Iosevka Web'}}>
+					<p css={{fontSize: 40, fontFamily: 'Iosevka Web'}}>
 						<span>but only </span>
 						<animated.span style={{
 							fontWeight: 400,
