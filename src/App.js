@@ -13,7 +13,7 @@ const useCollectedEmojiState = createPersistedState("collected-emoji")
 
 const target = DateTime.local(2020, 12, 23, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
-const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝"]
+const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈"]
 const randomEmoji = sample(emojis)
 
 export const App=()=> {
