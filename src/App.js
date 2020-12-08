@@ -5,14 +5,22 @@ import {DateTime} from "luxon"
 import humanizeDuration from "humanize-duration"
 import {useState, useEffect } from "react"
 import {useSpring, animated} from 'react-spring'
-import {sample} from "lodash"
+import {sample, keep} from "lodash"
+import createPersistedState from 'use-persisted-state'
+
+const useCollectedEmojiState = createPersistedState("collected-emoji")
 
 
 const target = DateTime.local(2020, 12, 23, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
-const randomEmoji = sample(["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝"])
+const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝"]
+const randomEmoji = sample(emojis)
 
 export const App=()=> {
+	const [collectedEmojis, setCollectedEmojis] = useCollectedEmojiState([])
+	useEffect(()=> {
+		setCollectedEmojis(emojis.filter(x => [...collectedEmojis, randomEmoji].includes(x)))
+	}, [])
 	const [ticker, updateTicker] = useState(0)
 	const [slowerTicker, updateSlowerTicker] = useState(0)
 	useEffect(() => {
@@ -64,6 +72,9 @@ export const App=()=> {
 					</p>
 				</>
 			)}
+			<p />
+			<p style={{fontFamily: "Iosevka Web"}}>Collected endings: {collectedEmojis.length}/{emojis.length}</p>
+			<p style={{fontFamily: "Iosevka Web"}}>{collectedEmojis.join(" ")}</p>
 		</div>
 	)
 }
