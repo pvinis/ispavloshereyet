@@ -5,10 +5,12 @@ import {DateTime} from "luxon"
 import humanizeDuration from "humanize-duration"
 import {useState, useEffect } from "react"
 import {useSpring, animated} from 'react-spring'
+import {sample} from "lodash"
 
 
 const target = DateTime.local(2020, 12, 23, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
+const randomEmoji = sample(["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝"])
 
 export const App=()=> {
 	const [ticker, updateTicker] = useState(0)
@@ -38,6 +40,7 @@ export const App=()=> {
 	const {x} = useSpring({x: ticker % 2 === 0 ? 5 : 0.5, config: {duration: 1000}})
 	const {slowX} = useSpring({slowX: slowerTicker % 2 === 0 ? 1 : 0, config: {duration: 400}})
 
+
 	return (
 		<div style={{position: "absolute", top: 0, bottom: 0, left: 0, right: 0, backgroundColor: color, display: 'flex', alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
 			{targetHasPast ? (
@@ -57,7 +60,7 @@ export const App=()=> {
 									output: [50,   52,   50,   52, 50],
         						})
 						}}>{diff}</animated.span>
-						<span> left</span>
+						<span> left {randomEmoji}</span>
 					</p>
 				</>
 			)}
