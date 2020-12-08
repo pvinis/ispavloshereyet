@@ -77,12 +77,21 @@ export const App=()=> {
 			<p />
 			<p style={{fontFamily: "Iosevka Web"}}>Collected endings: {collectedEmojis.length}/{emojis.length}</p>
 			<div style={{display: "flex", flexDirection: "row"}}>
-				{collectedEmojis.map(x => (
+				{emojis
+				.map(x => {
+					if ([...collectedEmojis, randomEmoji].includes(x)) {
+						return x
+					}
+					return null
+				})
+				.map(x => (
 					<>
 					<p
 						style={{fontFamily: "Iosevka Web", margin: 6, cursor: "default"}}
-						onClick={()=>{setOverrideEmoji(x)}}
-					>{x}</p>
+						onClick={()=>{
+							if (x !== null) setOverrideEmoji(x)
+							}}
+					>{x ?? "?"}</p>
 					</>
 				))}
 			</div>
