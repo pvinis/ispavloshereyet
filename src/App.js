@@ -21,6 +21,8 @@ export const App=()=> {
 	useEffect(()=> {
 		setCollectedEmojis(emojis.filter(x => [...collectedEmojis, randomEmoji].includes(x)))
 	}, [])
+	const [overrideEmoji, setOverrideEmoji] = useState(null)
+
 	const [ticker, updateTicker] = useState(0)
 	const [slowerTicker, updateSlowerTicker] = useState(0)
 	useEffect(() => {
@@ -68,13 +70,22 @@ export const App=()=> {
 									output: [50,   52,   50,   52, 50],
         						})
 						}}>{diff}</animated.span>
-						<span> left {randomEmoji}</span>
+						<span> left {overrideEmoji ?? randomEmoji}</span>
 					</p>
 				</>
 			)}
 			<p />
 			<p style={{fontFamily: "Iosevka Web"}}>Collected endings: {collectedEmojis.length}/{emojis.length}</p>
-			<p style={{fontFamily: "Iosevka Web"}}>{collectedEmojis.join(" ")}</p>
+			<div style={{display: "flex", flexDirection: "row"}}>
+				{collectedEmojis.map(x => (
+					<>
+					<p
+						style={{fontFamily: "Iosevka Web", margin: 6, cursor: "default"}}
+						onClick={()=>{setOverrideEmoji(x)}}
+					>{x}</p>
+					</>
+				))}
+			</div>
 		</div>
 	)
 }
