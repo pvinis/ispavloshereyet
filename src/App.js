@@ -1,12 +1,15 @@
 /* @jsx jsx */
 import { jsx } from "@emotion/react";
-import React from "react"
+import React, { useRef } from "react"
 import {DateTime} from "luxon"
 import humanizeDuration from "humanize-duration"
 import {useState, useEffect } from "react"
 import {useSpring, animated} from 'react-spring'
 import {sample, keep} from "lodash"
 import createPersistedState from 'use-persisted-state'
+import Confetti from 'react-confetti'
+import { useWindowSize } from "react-use"
+import Reward from 'react-rewards';
 
 const useCollectedEmojiState = createPersistedState("collected-emoji")
 
@@ -17,6 +20,8 @@ const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(
 const randomEmoji = sample(emojis)
 
 export const App=()=> {
+	const rewardRef = useRef()
+	const { width, height} = useWindowSize()
 	const [collectedEmojis, setCollectedEmojis] = useCollectedEmojiState([])
 	useEffect(()=> {
 		setCollectedEmojis(emojis.filter(x => [...collectedEmojis, randomEmoji].includes(x)))
@@ -54,9 +59,39 @@ export const App=()=> {
 	return (
 		<div style={{position: "absolute", top: 0, bottom: 0, left: 0, right: 0, backgroundColor: color, display: 'flex', alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
 			{targetHasPast ? (
+				<div style={{display: "flex", alignItems: "center", flexDirection: "column"}}>
+				<Confetti
+					width={width}
+					height={height}
+				/>
+				<Confetti
+					width={width}
+					height={height}
+					gravity={-0.1}
+					confettiSource={{x: 0, y: height, w: width, h: 0}}
+				/>
+				{/* <Confetti
+					width={width}
+					height={height}
+					confettiSource={{x: width/2, y: height/2+300}}
+				/> */}
+				<Reward type="emoji" ref={rewardRef} config={{
+				elementSize: 100,
+				spread: 300,
+				angle: Math.floor(Math.random()*360)
+				}}>
 					<animated.p style={{fontSize: 80, fontFamily: 'Iosevka Web', fontWeight: 900,
 						transform: x.interpolate(x => `scale(${x})`),
-					}}>YES!!</animated.p>
+						cursor: "default",
+						userSelect: "none",
+					}}
+						onClick={()=>{
+							rewardRef.current.rewardMe()
+							}}
+					>YES!!</animated.p>
+				</Reward>
+			<p style={{fontFamily: "Iosevka Web"}}>💝 Go give him hugs and kisses! He'll love it! 💝</p>
+				</div>
 			) : (
 				<>
 					<p style={{fontSize: 60, fontFamily: 'Iosevka Web', fontWeight: 500, transform: "rotate(8deg)"}}>Not yet,</p>
@@ -72,8 +107,6 @@ export const App=()=> {
 						}}>{diff}</animated.span>
 						<span> left {overrideEmoji ?? randomEmoji}</span>
 					</p>
-				</>
-			)}
 			<p />
 			<p style={{fontFamily: "Iosevka Web"}}>Collected endings: {collectedEmojis.length}/{emojis.length}</p>
 			<div style={{display: "flex", flexDirection: "row"}}>
@@ -95,6 +128,8 @@ export const App=()=> {
 					</>
 				))}
 			</div>
+				</>
+			)}
 		</div>
 	)
 }
