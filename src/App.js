@@ -10,6 +10,7 @@ import createPersistedState from 'use-persisted-state'
 import Confetti from 'react-confetti'
 import { useWindowSize } from "react-use"
 import Reward from 'react-rewards';
+import { sendMessage } from "./Tracking";
 
 const useCollectedEmojiState = createPersistedState("collected-emoji")
 
@@ -28,6 +29,9 @@ export const App=()=> {
 	}, [])
 	const [overrideEmoji, setOverrideEmoji] = useState(null)
 
+	useEffect(() => {
+		sendMessage()
+	}, [])
 	const [ticker, updateTicker] = useState(0)
 	const [slowerTicker, updateSlowerTicker] = useState(0)
 	useEffect(() => {
