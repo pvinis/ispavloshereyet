@@ -133,20 +133,33 @@ export const App=()=> {
 			<p style={{fontFamily: "Iosevka Web"}}>Collected endings: {collectedEmojis.length}/{emojis.length}</p>
 			<div style={{display: "flex", flexDirection: "row"}}>
 				{emojis
-				.map(x => {
-					if ([...collectedEmojis, randomEmoji].includes(x)) {
-						return x
+				.map(f => {
+					if ([...collectedEmojis, randomEmoji].includes(f)) {
+						const shownEmoji = f
+	let Comp = null
+	if (safeEmojis.includes(shownEmoji)) {
+		const im = twemoji.parse(shownEmoji)
+		const imsrc = im.split(' ').filter(x => x.startsWith("src"))[0].split('"')[1]
+		Comp = () => <img style={{ height: '1em', verticalAlign: '-0.125em'}} src={imsrc} />
+	} else if (safeMultiEmojis.includes(shownEmoji)) {
+		const ims = shownEmoji.split().map(x => twemoji.parse(x))[0]
+		const imsrcs = drop(ims.split('<img'),1).map(y => y.split(' ').filter(x => x.startsWith("src"))[0].split('"')[1])
+	Comp = () => <>{imsrcs.map(x => <img key={x} style={{ height: '1em',  verticalAlign: '-0.125em'}} src={x} />)}</>
+	} else {
+		Comp = () => <span>{shownEmoji}</span>
+	}
+						return {Comp, x: f}
 					}
-					return null
+					return {Comp: null, x: null}
 				})
-				.map(x => (
+				.map(({Comp, x}) => (
 					<>
 					<p
 						style={{fontFamily: "Iosevka Web", margin: 6, cursor: "default"}}
 						onClick={()=>{
 							if (x !== null) setOverrideEmoji(x)
 							}}
-					>{x ?? "?"}</p>
+					>{x !== null ? <Comp /> : "?"}</p>
 					</>
 				))}
 			</div>
