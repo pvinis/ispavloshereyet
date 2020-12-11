@@ -1,23 +1,26 @@
 /* @jsx jsx */
 import { jsx } from "@emotion/react";
-import React, { useRef } from "react"
+import React, { memo, useRef } from "react"
 import {DateTime} from "luxon"
 import humanizeDuration from "humanize-duration"
 import {useState, useEffect } from "react"
 import {useSpring, animated} from 'react-spring'
-import {sample, keep} from "lodash"
+import {sample, keep, over, drop} from "lodash"
 import createPersistedState from 'use-persisted-state'
 import Confetti from 'react-confetti'
 import { useWindowSize } from "react-use"
 import Reward from 'react-rewards';
 import { sendMessage } from "./Tracking";
+import twemoji from 'twemoji'
 
 const useCollectedEmojiState = createPersistedState("collected-emoji")
 
 
 const target = DateTime.local(2020, 12, 23, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
-const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈"]
+const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰"]
+const safeEmojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "💜", "💝", "🥰"]
+const safeMultiEmojis = ["🥺👉👈"]
 const randomEmoji = sample(emojis)
 
 export const App=()=> {
@@ -58,6 +61,20 @@ export const App=()=> {
 
 	const {x} = useSpring({x: ticker % 2 === 0 ? 5 : 0.5, config: {duration: 1000}})
 	const {slowX} = useSpring({slowX: slowerTicker % 2 === 0 ? 1 : 0, config: {duration: 400}})
+
+	const shownEmoji = overrideEmoji ?? randomEmoji
+	let Comp = null
+	if (safeEmojis.includes(shownEmoji)) {
+		const im = twemoji.parse(shownEmoji)
+		const imsrc = im.split(' ').filter(x => x.startsWith("src"))[0].split('"')[1]
+		Comp = () => <img style={{ height: '1em', verticalAlign: '-0.125em'}} src={imsrc} />
+	} else if (safeMultiEmojis.includes(shownEmoji)) {
+		const ims = shownEmoji.split().map(x => twemoji.parse(x))[0]
+		const imsrcs = drop(ims.split('<img'),1).map(y => y.split(' ').filter(x => x.startsWith("src"))[0].split('"')[1])
+	Comp = () => <>{imsrcs.map(x => <img key={x} style={{ height: '1em',  verticalAlign: '-0.125em'}} src={x} />)}</>
+	} else {
+		Comp = () => <span>{shownEmoji}</span>
+	}
 
 
 	return (
@@ -109,7 +126,8 @@ export const App=()=> {
 									output: [50,   52,   50,   52, 50],
         						})
 						}}>{diff}</animated.span>
-						<span> left {overrideEmoji ?? randomEmoji}</span>
+						<span> left </span>
+							 <Comp />
 					</p>
 			<p />
 			<p style={{fontFamily: "Iosevka Web"}}>Collected endings: {collectedEmojis.length}/{emojis.length}</p>
@@ -137,3 +155,5 @@ export const App=()=> {
 		</div>
 	)
 }
+
+
