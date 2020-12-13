@@ -18,16 +18,21 @@ const useCollectedEmojiState = createPersistedState("collected-emoji")
 
 const target = DateTime.local(2020, 12, 23, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
-const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰"]
+const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰", "יאללה"]
 const safeEmojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "💜", "💝", "🥰"]
 const safeMultiEmojis = ["🥺👉👈"]
-const randomEmoji = sample(emojis)
+let randomEmoji
 
 export const App=()=> {
+
 	const rewardRef = useRef()
 	const { width, height} = useWindowSize()
 	const [collectedEmojis, setCollectedEmojis] = useCollectedEmojiState([])
 	useEffect(()=> {
+		let emojisToPickFrom = emojis.filter(x => !collectedEmojis.includes(x))
+		if (emojisToPickFrom.length === 0) emojisToPickFrom = emojis
+
+		randomEmoji = sample(emojisToPickFrom)
 		setCollectedEmojis(emojis.filter(x => [...collectedEmojis, randomEmoji].includes(x)))
 	}, [])
 	const [overrideEmoji, setOverrideEmoji] = useState(null)
