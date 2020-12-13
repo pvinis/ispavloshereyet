@@ -18,7 +18,7 @@ const useCollectedEmojiState = createPersistedState("collected-emoji")
 
 const target = DateTime.local(2020, 12, 23, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
-const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰", "יאללה"]
+const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰", "יאללה", "פרה פרה"]
 const safeEmojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "💜", "💝", "🥰"]
 const safeMultiEmojis = ["🥺👉👈"]
 let randomEmoji
