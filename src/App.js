@@ -85,7 +85,7 @@ export const App=()=> {
 	const fontSizes= isPhone ? {
 big: 70,
 medium: 60,
-small: 30,
+small: 26,
 	} : {
 		big: 80,
 		medium: 60,
