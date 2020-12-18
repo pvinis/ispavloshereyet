@@ -8,7 +8,7 @@ import {useSpring, animated} from 'react-spring'
 import {sample, keep, over, drop} from "lodash"
 import createPersistedState from 'use-persisted-state'
 import Confetti from 'react-confetti'
-import { useWindowSize } from "react-use"
+import { useWindowSize, useMedia } from "react-use"
 import Reward from 'react-rewards';
 import { sendMessage } from "./Tracking";
 import twemoji from 'twemoji'
@@ -25,6 +25,7 @@ let randomEmoji
 
 export const App=()=> {
 
+	const isPhone = useMedia('(max-width: 600px)')
 	const rewardRef = useRef()
 	const { width, height} = useWindowSize()
 	const [collectedEmojis, setCollectedEmojis] = useCollectedEmojiState([])
@@ -81,6 +82,15 @@ export const App=()=> {
 		Comp = () => <span>{shownEmoji}</span>
 	}
 
+	const fontSizes= isPhone ? {
+big: 70,
+medium: 60,
+small: 30,
+	} : {
+		big: 80,
+		medium: 60,
+		small: 40,
+	}
 
 	return (
 		<div style={{position: "absolute", top: 0, bottom: 0, left: 0, right: 0, backgroundColor: color, display: 'flex', alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
@@ -106,7 +116,7 @@ export const App=()=> {
 				spread: 300,
 				angle: Math.floor(Math.random()*360)
 				}}>
-					<animated.p style={{fontSize: 80, fontFamily: 'Iosevka Web', fontWeight: 900,
+					<animated.p style={{fontSize: fontSizes.big, fontFamily: 'Iosevka Web', fontWeight: 900,
 						transform: x.interpolate(x => `scale(${x})`),
 						cursor: "default",
 						userSelect: "none",
@@ -120,23 +130,25 @@ export const App=()=> {
 				</div>
 			) : (
 				<>
-					<p style={{fontSize: 60, fontFamily: 'Iosevka Web', fontWeight: 500, transform: "rotate(8deg)"}}>Not yet,</p>
-					<p css={{fontSize: 40, fontFamily: 'Iosevka Web'}}>
+					<p style={{fontSize: fontSizes.medium, fontFamily: 'Iosevka Web', fontWeight: 500, transform: "rotate(8deg)"}}>Not yet,</p>
+					<p css={{fontSize: fontSizes.small, fontFamily: 'Iosevka Web'}}>
 						<span>but only </span>
+						{isPhone && <br />}
 						<animated.span style={{
 							fontWeight: 400,
 							fontSize: slowX
 								.interpolate({
 									range:  [ 0, 0.25, 0.50, 0.75,  1],
-									output: [50,   52,   50,   52, 50],
+									output: [10,   12,   10,   12, 10].map(n => fontSizes.small+n),
         						})
 						}}>{diff}</animated.span>
+						{isPhone && <br />}
 						<span> left </span>
 							 <Comp />
 					</p>
 			<p />
 			<p style={{fontFamily: "Iosevka Web"}}>Collected endings: {collectedEmojis.length}/{emojis.length}</p>
-			<div style={{display: "flex", flexDirection: "row"}}>
+			<div style={{display: "flex", flexDirection: "row", flexWrap:'wrap' }}>
 				{emojis
 				.map(f => {
 					if ([...collectedEmojis, randomEmoji].includes(f)) {
@@ -158,14 +170,16 @@ export const App=()=> {
 					return {Comp: null, x: null}
 				})
 				.map(({Comp, x}) => (
-					<>
+					<div
+						style={{border:`1px solid ${x === shownEmoji ? "white" : "black"}`, margin: 6}}
+					>
 					<p
-						style={{fontFamily: "Iosevka Web", margin: 6, cursor: "default"}}
+						style={{fontFamily: "Iosevka Web", margin: 2, cursor: "default"}}
 						onClick={()=>{
 							if (x !== null) setOverrideEmoji(x)
 							}}
 					>{x !== null ? <Comp /> : "?"}</p>
-					</>
+					</div>
 				))}
 			</div>
 				</>
