@@ -16,7 +16,7 @@ import twemoji from 'twemoji'
 const useCollectedEmojiState = createPersistedState("collected-emoji")
 
 
-const target = DateTime.local(2020, 12, 23, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
+const target = DateTime.local(2020, 12, 21, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
 const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰", "יאללה", "פרה פרה", "ואז אני מחבק אותך", "👫", "¯\\ヽ(´ー｀)ノ/¯"]
 const safeEmojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "💜", "💝", "🥰", "👫"]
