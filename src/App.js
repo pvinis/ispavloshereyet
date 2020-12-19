@@ -16,10 +16,10 @@ import twemoji from 'twemoji'
 const useCollectedEmojiState = createPersistedState("collected-emoji")
 
 
-const target = DateTime.local(2020, 12, 21, 12, 32).setZone('Europe/Amsterdam', {keepLocalTime: true})
+const target = DateTime.local(2020, 12, 20, 15, 2).setZone('Europe/Amsterdam', {keepLocalTime: true})
 
-const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰", "יאללה", "פרה פרה", "ואז אני מחבק אותך", "👫", "¯\\ヽ(´ー｀)ノ/¯"]
-const safeEmojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "💜", "💝", "🥰", "👫"]
+const emojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "yo!", "💜", "(⊃｡•́‿•̀｡)⊃", "💝", "UwU", "🥺👉👈", "🥰", "יאללה", "פרה פרה", "ואז אני מחבק אותך", "👫", "¯\\ヽ(´ー｀)ノ/¯", "🤞"]
+const safeEmojis = ["😻", "😺", "🤩", "🍑", "✨", "🚅", "💜", "💝", "🥰", "👫", "🤞"]
 const safeMultiEmojis = ["🥺👉👈"]
 let randomEmoji
 
