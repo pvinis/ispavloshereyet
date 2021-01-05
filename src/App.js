@@ -1,7 +1,6 @@
 /* @jsx jsx */
 import { jsx } from "@emotion/react";
 import React from "react"
-import {DateTime} from "luxon"
 import { useEffect } from "react"
 import {  useMedia } from "react-use"
 import { sendMessage } from "./Tracking";
