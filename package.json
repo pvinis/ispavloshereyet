@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "main": "src/index.js",
   "dependencies": {
-    "@emotion/react": "11.1.4",
+    "@emotion/react": "11.1.5",
     "humanize-duration": "^3.24.0",
     "lodash": "^4.17.20",
     "luxon": "^1.25.0",
