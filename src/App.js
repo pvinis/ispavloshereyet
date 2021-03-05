@@ -16,7 +16,7 @@ export const App=()=> {
 	}, [])
 
 
-	const color = "white"
+	const color = "black"
 ///// add my face as favicon and app manifest thing
 
 	const fontSizes= isPhone ? {
@@ -31,8 +31,7 @@ small: 26,
 
 	return (
 		<div style={{position: "absolute", top: 0, bottom: 0, left: 0, right: 0, backgroundColor: color, display: 'flex', alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
-					<p style={{fontFamily: "Iosevka Web"}}>Wednesday, babyyyyy!</p>
-			<p style={{fontFamily: "Iosevka Web"}}>Hold on to your pants (and then swiftly remove them)!</p>
+					<p style={{fontFamily: "Iosevka Web" , color: "grey"}}>Pavlos is here no more.</p>
 		</div>
 	)
 }
