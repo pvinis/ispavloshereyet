@@ -16,7 +16,7 @@ export const App=()=> {
 	}, [])
 
 
-	const color = "white"
+	const color = "black"
 ///// add my face as favicon and app manifest thing
 
 	const fontSizes= isPhone ? {
