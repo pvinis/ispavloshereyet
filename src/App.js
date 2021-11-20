@@ -31,7 +31,7 @@ small: 26,
 
 	return (
 		<div style={{position: "absolute", top: 0, bottom: 0, left: 0, right: 0, backgroundColor: color, display: 'flex', alignItems: "center", justifyContent: "center", flexDirection: "column"}}>
-					<p style={{fontFamily: "Iosevka Web" , color: "white"}}>♟</p>
+					<p style={{fontFamily: "Iosevka Web" , color: "white"}}>♟ wow test</p>
 		</div>
 	)
 }
