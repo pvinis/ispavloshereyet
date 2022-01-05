@@ -6,6 +6,10 @@ const p = new push({
 	k: process.env.REACT_APP_PUSHSAFER_KEY,
 })
 
+if (process.env.REACT_APP_PUSHSAFER_KEY === undefined) {
+	console.warn("key?")
+}
+
 export const sendMessage = async () => {
 	const message = {
 		m: await publicIP.v4(),
