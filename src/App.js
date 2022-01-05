@@ -12,7 +12,7 @@ export const App=()=> {
 	const isPhone = useMedia('(max-width: 600px)')
 
 	useEffect(() => {
-//		sendMessage()
+		sendMessage()
 	}, [])
 
 
