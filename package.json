@@ -6,7 +6,7 @@
     "@emotion/react": "11.1.5",
     "humanize-duration": "^3.24.0",
     "lodash": "^4.17.20",
-    "luxon": "^1.25.0",
+    "luxon": "^3.0.0",
     "public-ip": "^4.0.3",
     "pushsafer-notifications": "^0.1.8",
     "react": "16.12.0",
