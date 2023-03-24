@@ -9856,9 +9856,9 @@ punycode@^2.1.0, punycode@^2.1.1:
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
 pushsafer-notifications@^0.1.8:
-  version "0.1.8"
-  resolved "https://registry.npmjs.org/pushsafer-notifications/-/pushsafer-notifications-0.1.8.tgz#0713dceee87417267d218d9def9d5e3da4948262"
-  integrity sha512-0gmGjMYWK0lYkHoRWEALEoSwi/UWkRfug3wHsduIvUw+72BMCtu5n/QGjRbqthD86QoYMSxqNnmTZi97MzWh7w==
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/pushsafer-notifications/-/pushsafer-notifications-0.1.9.tgz#d70ba458eb9a139fc735ab8b05c22d643dc669f4"
+  integrity sha512-y0kHP+vKV6YaTpdP+ZENwNhDFmYA8HvosxWyerYFigg9CQQN+Qnfc1N0viKmWvfgBpEeGdEcIxeGJGkplxAEEQ==
 
 q@^1.1.2:
   version "1.5.1"
