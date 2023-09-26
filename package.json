@@ -28,7 +28,5 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.9"
   },
-  "type": "module",
-  "//netlify": "stuff for netlify",
-  "packageManager": "pnpm@8.8.0"
+  "type": "module"
 }
