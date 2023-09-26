@@ -1,8 +1,5 @@
 {
   "name": "ispavloshereyet",
-    "humanize-duration": "^3.24.0",
-    "public-ip": "^4.0.3",
-    "pushsafer-notifications": "^0.1.8",
   "version": "2.0.0",
   "scripts": {
     "dev": "vite",
