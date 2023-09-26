@@ -1,34 +1,28 @@
-import { StyleSheet, Text, View } from "react-native"
+import { useState } from "react"
+import { Button, Text, TextInput, View } from "react-native"
 
 export default function Page() {
+	const [text, setText] = useState("")
+
+	//// check location change
+
 	return (
-		<View style={styles.container}>
-			<View style={styles.main}>
-				<Text style={styles.title}>Hello World</Text>
-				<Text style={styles.subtitle}>Ths is the first page of your app.</Text>
+		<View>
+			<View>
+				<Text className="text-[#38434D] text-3xl">Add location</Text>
+				<TextInput
+					className="border-2 border-[#38434D] rounded-md"
+					value={text}
+					onChangeText={setText}
+				/>
+
+				<Button
+					title="Add"
+					onPress={() => {
+						//// gh gist add
+					}}
+				/>
 			</View>
 		</View>
 	)
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignItems: "center",
-		padding: 24,
-	},
-	main: {
-		flex: 1,
-		justifyContent: "center",
-		maxWidth: 960,
-		marginHorizontal: "auto",
-	},
-	title: {
-		fontSize: 64,
-		fontWeight: "bold",
-	},
-	subtitle: {
-		fontSize: 36,
-		color: "#38434D",
-	},
-})

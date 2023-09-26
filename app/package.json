@@ -10,6 +10,7 @@
     "doctor:fix": "pnpx expo install --check"
   },
   "dependencies": {
+    "@octokit/rest": "^20.0.2",
     "expo": "~49.0.12",
     "expo-constants": "~14.4.2",
     "expo-linking": "~5.0.2",
