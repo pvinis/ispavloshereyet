@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+import plugin from "tailwindcss/plugin"
 import { hairlineWidth } from "nativewind/theme"
 
 const config: Config = {
@@ -22,6 +23,19 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("nativewind/dist/tailwind/safe-area").safeArea],
+  plugins: [
+    require("nativewind/dist/tailwind/safe-area").safeArea,
+    plugin(({ addUtilities }) =>
+      addUtilities({
+        // usually paired with `absolute`
+        ".full": {
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+        },
+      }),
+    ),
+  ],
 }
 export default config

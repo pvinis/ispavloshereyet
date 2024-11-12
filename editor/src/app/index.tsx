@@ -1,6 +1,12 @@
-// import { useEffect, useState } from "react"
 // import * as TaskManager from "expo-task-manager"
+import { tx } from "@instantdb/react-native"
+import { id } from "@instantdb/react-native"
+import { DateTime } from "luxon"
+import { verifyInstallation } from "nativewind"
+import { useState } from "react"
 import { Button, Text, TextInput, View } from "react-native"
+import DateTimePicker from "react-native-ui-datepicker"
+import { db } from "~/db"
 // import {
 //   Accuracy,
 //   LocationObject,
@@ -14,7 +20,6 @@ import { Button, Text, TextInput, View } from "react-native"
 // const LOCATION_TASK_NAME = "background-location-task"
 
 // export default function Page() {
-//   const [text, setText] = useState("")
 
 //   const [current, setCurrent] = useState("")
 //   useEffect(() => {
@@ -102,19 +107,33 @@ import { Button, Text, TextInput, View } from "react-native"
 // )
 
 export default function Index() {
+  const [text, setText] = useState("")
+
+  const [arrivedAt, setArrivedAt] = useState(DateTime.now().toISO())
+
+  // verifyInstallation()
   return (
-    <View className="bg-t flex-1">
-      <Text>Hello</Text>
-      <Text>Hello</Text>
-      <Text>Hello</Text>
-      <Text>Hello</Text>
-      <Text className="text-t">Hello</Text>
-      <Text className="text-t">Hello</Text>
-      <Text className="text-t">Hello</Text>
-      <Text>Hello</Text>
-      <Text>Hello</Text>
-      <Text>Hello</Text>
-      <Text>Hello</Text>
+    <View className="flex-1 gap-4 bg-background py-safe">
+      <Text className="text-3xl text-on-background">Add location</Text>
+      <TextInput
+        className="border-border rounded border py-2 text-xl"
+        value={text}
+        onChangeText={setText}
+      />
+
+      <DateTimePicker
+        mode="single"
+        date={arrivedAt}
+        onChange={(params) => setArrivedAt(params.date)}
+      />
+
+      <Button
+        title="Add"
+        onPress={() => {
+          db.transact([
+            tx.locations[id()].update({
+              place: text,
+              arrivedAt,
     </View>
   )
 }

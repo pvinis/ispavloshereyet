@@ -1,6 +1,6 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --color-background: theme(colors.white);
@@ -10,11 +10,15 @@
   --color-opening: #f9f9f9; /* input field background */
 
   --color-primary: blue;
+
+  --color-border: theme(colors.zinc.600);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: theme(colors.black);
+    --color-background: theme(colors.zinc.900);
     --color-on-background: theme(colors.white);
+
+    --color-border: theme(colors.zinc.400);
   }
 }
