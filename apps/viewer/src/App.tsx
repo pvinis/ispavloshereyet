@@ -63,5 +63,3 @@ export function App() {
   )
 }
 
-//// add turborepo
-////move to vercel

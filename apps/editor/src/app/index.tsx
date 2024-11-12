@@ -47,7 +47,6 @@ import { db } from "~/db"
 //     doIt()
 //   }, [fgStatus?.granted, bgStatus?.granted])
 
-
 // TaskManager.defineTask<{ locations: LocationObject[] }>(
 //   LOCATION_TASK_NAME,
 //   ({ data: { locations }, error }) => {
