@@ -2,7 +2,6 @@
 import { tx } from "@instantdb/react-native"
 import { id } from "@instantdb/react-native"
 import { DateTime } from "luxon"
-import { verifyInstallation } from "nativewind"
 import { useState } from "react"
 import { Button, Text, TextInput, View } from "react-native"
 import DateTimePicker from "react-native-ui-datepicker"
@@ -18,8 +17,6 @@ import { db } from "~/db"
 // } from "expo-location"
 
 // const LOCATION_TASK_NAME = "background-location-task"
-
-// export default function Page() {
 
 //   const [current, setCurrent] = useState("")
 //   useEffect(() => {
@@ -50,40 +47,6 @@ import { db } from "~/db"
 //     doIt()
 //   }, [fgStatus?.granted, bgStatus?.granted])
 
-//   return (
-//     <View>
-//       <View>
-//         <Text className="text-3xl text-[#38434D]">Add location</Text>
-//         <TextInput
-//           className="rounded-md border-2 border-[#38434D]"
-//           value={text}
-//           onChangeText={setText}
-//         />
-
-//         <Button
-//           title="Add"
-//           onPress={async () => {
-//             const newContent = JSON.parse(current)
-//             newContent["version-1"].locations = [
-//               text,
-//               ...newContent["version-1"].locations,
-//             ]
-
-//             await octokit.gists.update({
-//               gist_id: "7afe23dae3890155525554014b8cf77f",
-//               files: {
-//                 "pavlos-location-data.json": {
-//                   content: JSON.stringify(newContent, null, 2),
-//                 },
-//               },
-//             })
-//           }}
-//         />
-//         <Text>{current}</Text>
-//       </View>
-//     </View>
-//   )
-// }
 
 // TaskManager.defineTask<{ locations: LocationObject[] }>(
 //   LOCATION_TASK_NAME,
@@ -111,7 +74,6 @@ export default function Index() {
 
   const [arrivedAt, setArrivedAt] = useState(DateTime.now().toISO())
 
-  // verifyInstallation()
   return (
     <View className="flex-1 gap-4 bg-background py-safe">
       <Text className="text-3xl text-on-background">Add location</Text>
@@ -134,6 +96,10 @@ export default function Index() {
             tx.locations[id()].update({
               place: text,
               arrivedAt,
+            }),
+          ])
+        }}
+      />
     </View>
   )
 }

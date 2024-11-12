@@ -1,4 +1,4 @@
-const defaultTheme = require("tailwindcss/defaultTheme")
+import tailwindcssMotion from "tailwindcss-motion"
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -11,9 +11,9 @@ export default {
         error: "var(--color-error)",
       },
       fontFamily: {
-        mono: ["iosevka", ...defaultTheme.fontFamily.mono],
+        mono: ["iosevka"],
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindcssMotion],
 }
