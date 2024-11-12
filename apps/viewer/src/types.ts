@@ -1,5 +1,5 @@
 export interface ClassName {
-  className?: string
+	className?: string
 }
 
 export type ISODateString = string

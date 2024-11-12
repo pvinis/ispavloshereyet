@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --color-background: #8c6e9b;
+	--color-background: #8c6e9b;
 
-  --color-on-background: theme(colors.slate.400);
+	--color-on-background: theme(colors.slate.400);
 
-  --color-error: theme(colors.red.300);
+	--color-error: theme(colors.red.300);
 }

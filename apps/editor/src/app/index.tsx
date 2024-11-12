@@ -69,36 +69,36 @@ import { db } from "~/db"
 // )
 
 export default function Index() {
-  const [text, setText] = useState("")
+	const [text, setText] = useState("")
 
-  const [arrivedAt, setArrivedAt] = useState(DateTime.now().toISO())
+	const [arrivedAt, setArrivedAt] = useState(DateTime.now().toISO())
 
-  return (
-    <View className="flex-1 gap-4 bg-background py-safe">
-      <Text className="text-3xl text-on-background">Add location</Text>
-      <TextInput
-        className="border-border rounded border py-2 text-xl"
-        value={text}
-        onChangeText={setText}
-      />
+	return (
+		<View className="flex-1 gap-4 bg-background py-safe">
+			<Text className="text-3xl text-on-background">Add location</Text>
+			<TextInput
+				className="border-border rounded border py-2 text-xl"
+				value={text}
+				onChangeText={setText}
+			/>
 
-      <DateTimePicker
-        mode="single"
-        date={arrivedAt}
-        onChange={(params) => setArrivedAt(params.date)}
-      />
+			<DateTimePicker
+				mode="single"
+				date={arrivedAt}
+				onChange={(params) => setArrivedAt(params.date)}
+			/>
 
-      <Button
-        title="Add"
-        onPress={() => {
-          db.transact([
-            tx.locations[id()].update({
-              place: text,
-              arrivedAt,
-            }),
-          ])
-        }}
-      />
-    </View>
-  )
+			<Button
+				title="Add"
+				onPress={() => {
+					db.transact([
+						tx.locations[id()].update({
+							place: text,
+							arrivedAt,
+						}),
+					])
+				}}
+			/>
+		</View>
+	)
 }
