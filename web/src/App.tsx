@@ -1,37 +1,24 @@
-import { useFetch } from "usehooks-ts"
-import locationJson from "./location.json"
-
-const locationDataUrl =
-	"https://gist.githubusercontent.com/pvinis/7afe23dae3890155525554014b8cf77f/raw/ba73c5386170c763bc00cb4cf02e8481bab002bb/pavlos-location-data.json"
+import { db } from "./db"
+import { Message } from "./Message"
 
 export function App() {
-	const { data, error } = useFetch(locationDataUrl)
+  const { isLoading, error, data } = db.useQuery({ locations: {} })
 
-	if (error) {
-		return (
-			<div className="absolute w-full h-full bg-slate-600 flex items-center justify-center flex-col font-mono">
-				<div className="text-red-500">Error fetching data</div>
-			</div>
-		)
-	}
+  if (error)
+    return <Message message="Error fetching data" className="text-error" />
 
-	if (!data) {
-		return (
-			<div className="absolute w-full h-full bg-slate-600 flex items-center justify-center flex-col font-mono">
-				<div className="text-gray-400">Loading...</div>
-			</div>
-		)
-	}
+  if (isLoading)
+    return <Message message="Loading..." className="text-zinc-400" />
 
-	return (
-		<div className="absolute w-full h-full bg-slate-600 flex items-center justify-center flex-col font-mono">
-			<ol className="text-gray-400">
-				{locationJson["version-1"].locations.map((location, index) => (
-					<li key={index} className="first:text-white">
-						{location}
-					</li>
-				))}
-			</ol>
-		</div>
-	)
+  return (
+    <div className="bg-background text-on-background absolute flex h-full w-full flex-col items-center justify-center font-mono">
+      <ol>
+        {data.locations.map(({ place }, index) => (
+          <li key={index} className="first:text-white">
+            {place}
+          </li>
+        ))}
+      </ol>
+    </div>
+  )
 }

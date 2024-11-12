@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --color-background: theme(colors.slate.600);
+
+  --color-on-background: theme(colors.slate.400);
+
+  --color-error: theme(colors.red.300);
+}
